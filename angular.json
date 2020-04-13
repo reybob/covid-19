@@ -32,7 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/Chart.js"]
           },
           "configurations": {
             "production": {
@@ -94,6 +94,7 @@
               "src/assets"
             ],
             "styles": [
+              "../node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []

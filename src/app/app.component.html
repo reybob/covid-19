@@ -1,1 +1,7 @@
-<h1>Hola</h1>
+<nav class="navbar navBarHome">
+  <h3>Covid-19 España</h3>
+  <!-- <a [routerLink]="['/graficas']">Graficas</a> -->
+  <i *ngIf="modoNoche"  class="fa fa-sun-o fa-2x" aria-hidden="true" (click)="cambiarModo()" style="color: #fff;"></i>
+  <i *ngIf="!modoNoche"  class="fa fa-moon-o fa-2x" aria-hidden="true" (click)="cambiarModo()" style="color: #000;"></i>
+</nav>
+<app-home [modoNoche]="modoNoche"></app-home>

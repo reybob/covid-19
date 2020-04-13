@@ -1,0 +1,56 @@
+.container-informe {
+  padding: 2rem 4rem;
+}
+.row {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+  margin-left: 0;
+  margin-right: 0;
+}
+.card-informe {
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  color: #000;
+  min-height: 200px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
+  0px 1px 1px 0px rgba(0,0,0,0.14),
+  0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.card-modoNoche {
+  background-color: #424241;
+  border: 1px solid #424241;
+  color: #fff;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+.card {
+ width: 50%;
+ display: block;
+ background-color: #333941;
+ box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+ position: relative;
+ min-height: 450px;
+ border-radius: 5px;
+ margin-bottom: 1rem;
+ border: none;
+ overflow: hidden;
+ color: #0a0a0a;
+}
+.card-content {
+ background: #fff;
+ border-top: solid 1px #cdcdcd;
+ padding: 5px 20px;
+}
+.card h3,
+.card p {
+ font-family: 'Roboto', sans-serif;
+}
+.card p {
+ font-weight: 300;
+}
+
+
