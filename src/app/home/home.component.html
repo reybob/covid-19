@@ -5,7 +5,7 @@
     <div class="card-informe mb-3" [ngClass]="{'card-modoNoche': modoNoche}">
       <div class="text-center mt-2">
         <i class="fa fa-users" aria-hidden="true"></i>
-        <h4 class="mt-2">{{totalData?.data.cases.total}}</h4>
+        <h3 class="mt-2">{{totalData?.data.cases.total}}</h3>
         <p>Total casos</p>
         <i class="fa fa-line-chart" style="color: red"
           aria-hidden="true">&nbsp;{{totalData?.data.cases.diffWithYesterday}}</i>
@@ -15,7 +15,7 @@
     <div class="card-informe mb-3" [ngClass]="{'card-modoNoche': modoNoche}">
       <div class="text-center mt-2">
         <i class="fa fa-hospital-o" aria-hidden="true"></i>
-        <h5 class="mt-2">{{totalData?.data.hospitalized.total}}</h5>
+        <h3 class="mt-2">{{totalData?.data.hospitalized.total}}</h3>
         <p>Total hospitalizados</p>
         <i class="fa fa-line-chart" style="color: red"
           aria-hidden="true">&nbsp;{{totalData?.data.hospitalized.diffWithYesterday}}</i>
@@ -25,8 +25,8 @@
     <!-- UCI -->
     <div class="card-informe mb-3" [ngClass]="{'card-modoNoche': modoNoche}">
       <div class="text-center mt-2">
-        <i class="fa fa-frown-o" aria-hidden="true"></i>
-        <h5 class="mt-2">{{totalData?.data.icu.total}}</h5>
+        <i class="fa fa-bed" aria-hidden="true"></i>
+        <h3 class="mt-2">{{totalData?.data.icu.total}}</h3>
         <p>Total UCI</p>
         <i class="fa fa-line-chart" style="color: red"
           aria-hidden="true">&nbsp;{{totalData?.data.icu.diffWithYesterday}}</i>
@@ -35,8 +35,8 @@
     <!-- Muertes -->
     <div class="card-informe mb-3" [ngClass]="{'card-modoNoche': modoNoche}">
       <div class="text-center mt-2">
-        <i class="fa fa-frown-o" aria-hidden="true"></i>
-        <h5 class="mt-2">{{totalData?.data.deaths.total}}</h5>
+        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+        <h3 class="mt-2">{{totalData?.data.deaths.total}}</h3>
         <p>Total muertes</p>
         <i class="fa fa-line-chart" style="color: red"
           aria-hidden="true">&nbsp;{{totalData?.data.deaths.diffWithYesterday}}</i>
@@ -45,10 +45,10 @@
     <!-- Recuperados -->
     <div class="card-informe mb-3" [ngClass]="{'card-modoNoche': modoNoche}">
       <div class="text-center mt-2">
-        <i class="fa fa-frown-o" aria-hidden="true"></i>
-        <h5 class="mt-2">{{totalData?.data.recovered.total}}</h5>
+        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        <h3 class="mt-2">{{totalData?.data.recovered.total}}</h3>
         <p>Total recuperados</p>
-        <i class="fa fa-line-chart" style="color: red"
+        <i class="fa fa-line-chart" style="color: green"
           aria-hidden="true">&nbsp;{{totalData?.data.recovered.diffWithYesterday}}</i>
       </div>
     </div>
@@ -64,7 +64,7 @@
                       (onDeSelectAll)="onDeSelectAll($event)">
     </angular2-multiselect> -->
     <select class="form-control" [(ngModel)]="seleccionarComunidad" (change)="onItemSelect($event)">
-      <option *ngFor="let comunidad of comunidadesAutonomas">{{comunidad}}</option>
+      <option *ngFor="let comunidad of comunidadesAutonomas ">{{comunidad}}</option>
     </select>
   </div>
 
