@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHistory();
-    this.getReports();
+    this.getReports(this.seleccionarComunidad);
     this.getAutonomousCommunities();
     this.fecha = new Date().toLocaleDateString();
 
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   onItemSelect(item: any) {
     console.log("Cambio seleccion comunidad 1", item);
     console.log("Cambio seleccion comunidad 2", this.seleccionarComunidad);
-    this.getReports();
+    this.getReports(this.seleccionarComunidad);
   }
   OnItemDeSelect(item: any) {
     console.log(item);
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     console.log(items);
   }
 
-  mostrarGraficaCasos() {
+  mostrarGraficaCasos(comunidadSeleccionada) {
     const ctx = (<HTMLCanvasElement>this.chartCases.nativeElement).getContext(
       "2d"
     );
@@ -92,26 +92,30 @@ export class HomeComponent implements OnInit {
     purple_orange_gradient.addColorStop(1, "rgba(199, 150, 239, 0.1)");
     purple_orange_gradient.addColorStop(0, "rgba(199, 150, 239, 1)");
 
-    const bar_chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: this.datosDia,
-        datasets: [
-          {
-            label: this.seleccionarComunidad,
-            data: this.comunidadCases,
-            backgroundColor: purple_orange_gradient,
-            hoverBackgroundColor: purple_orange_gradient,
-            hoverBorderWidth: 2,
-            hoverBorderColor: "purple",
-            borderWidth: 3,
-            borderColor: "#a77efc",
-          },
-        ],
-      },
-    });
+    if (bar_chart != null || bar_chart != undefined) {
+      bar_chart.destroy();
+    } else {
+      var bar_chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: this.datosDia,
+          datasets: [
+            {
+              label: comunidadSeleccionada,
+              data: this.comunidadCases,
+              backgroundColor: purple_orange_gradient,
+              hoverBackgroundColor: purple_orange_gradient,
+              hoverBorderWidth: 2,
+              hoverBorderColor: "purple",
+              borderWidth: 3,
+              borderColor: "#a77efc",
+            },
+          ],
+        },
+      });
+    }
   }
-  mostrarGraficaHospitalizados() {
+  mostrarGraficaHospitalizados(comunidadSeleccionada) {
     const ctx = (<HTMLCanvasElement>(
       this.chartHospitalizados.nativeElement
     )).getContext("2d");
@@ -126,7 +130,7 @@ export class HomeComponent implements OnInit {
         labels: this.datosDia,
         datasets: [
           {
-            label: this.seleccionarComunidad,
+            label: comunidadSeleccionada,
             data: this.comunidadHospitalized,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
@@ -139,7 +143,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-  mostrarGraficaUCI() {
+  mostrarGraficaUCI(comunidadSeleccionada) {
     const ctx = (<HTMLCanvasElement>this.chartUCI.nativeElement).getContext(
       "2d"
     );
@@ -154,7 +158,7 @@ export class HomeComponent implements OnInit {
         labels: this.datosDia,
         datasets: [
           {
-            label: this.seleccionarComunidad,
+            label: comunidadSeleccionada,
             data: this.comunidadIcu,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
@@ -167,7 +171,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-  mostrarGraficaMuertes() {
+  mostrarGraficaMuertes(comunidadSeleccionada) {
     const ctx = (<HTMLCanvasElement>this.chartDeaths.nativeElement).getContext(
       "2d"
     );
@@ -182,7 +186,7 @@ export class HomeComponent implements OnInit {
         labels: this.datosDia,
         datasets: [
           {
-            label: this.seleccionarComunidad,
+            label: comunidadSeleccionada,
             data: this.comunidadDeaths,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
@@ -195,7 +199,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-  mostrarGraficaRecuperados() {
+  mostrarGraficaRecuperados(comunidadSeleccionada) {
     const ctx = (<HTMLCanvasElement>(
       this.chartRecovered.nativeElement
     )).getContext("2d");
@@ -210,7 +214,7 @@ export class HomeComponent implements OnInit {
         labels: this.datosDia,
         datasets: [
           {
-            label: this.seleccionarComunidad,
+            label: comunidadSeleccionada,
             data: this.comunidadRecovered,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
@@ -238,7 +242,7 @@ export class HomeComponent implements OnInit {
   }
 
   // muestra los reportes por comunidad
-  public getReports() {
+  public getReports(comunidadSeleccionada) {
     this.comunidadCases = [];
     this.comunidadHospitalized = [];
     this.comunidadDeaths = [];
@@ -254,7 +258,7 @@ export class HomeComponent implements OnInit {
           resp.data.forEach((datosDia) => {
             this.datosDia.push(datosDia.timestamp.toString().substr(0, 10));
             datosDia.data.forEach((comunidad) => {
-              if (comunidad.autonomousCommunity === this.seleccionarComunidad) {
+              if (comunidad.autonomousCommunity === comunidadSeleccionada) {
                 this.comunidadCases.push(comunidad.values.cases);
                 this.comunidadHospitalized.push(comunidad.values.hospitalized);
                 this.comunidadDeaths.push(comunidad.values.deaths);
@@ -266,11 +270,11 @@ export class HomeComponent implements OnInit {
             });
           });
           console.log("Datos dia", this.datosDia);
-          this.mostrarGraficaCasos();
-          this.mostrarGraficaHospitalizados();
-          this.mostrarGraficaUCI();
-          this.mostrarGraficaMuertes();
-          this.mostrarGraficaRecuperados();
+          this.mostrarGraficaCasos(comunidadSeleccionada);
+          this.mostrarGraficaHospitalizados(comunidadSeleccionada);
+          this.mostrarGraficaUCI(comunidadSeleccionada);
+          this.mostrarGraficaMuertes(comunidadSeleccionada);
+          this.mostrarGraficaRecuperados(comunidadSeleccionada);
         },
         (error) => {
           console.error("ERROR: Unexpected response");
