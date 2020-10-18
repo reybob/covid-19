@@ -63,8 +63,8 @@
                       (onSelectAll)="onSelectAll($event)"
                       (onDeSelectAll)="onDeSelectAll($event)">
     </angular2-multiselect> -->
-    <select class="form-control" [(ngModel)]="seleccionarComunidad" (change)="onItemSelect($event)">
-      <option *ngFor="let comunidad of comunidadesAutonomas ">{{comunidad}}</option>
+    <select class="form-control text-capitalize" [ngClass]="{'select-modoNoche': modoNoche}" [(ngModel)]="seleccionarComunidad" (change)="onItemSelect($event)">
+      <option class="text-capitalize" *ngFor="let comunidad of comunidadesAutonomas ">{{comunidad}}</option>
     </select>
   </div>
 
@@ -90,13 +90,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-    </div>
-    <div class="col">
+    <div class="col-6">
       <h3>Recuperados</h3>
       <canvas id="chartRecovered" #chartRecovered></canvas>
-    </div>
-    <div class="col">
     </div>
   </div>
 
